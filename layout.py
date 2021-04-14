@@ -1,10 +1,12 @@
 import tkinter as tk
 
 global lbl_lost
+global lbl_won
 
 buttons = []
-score = 3
+score = 25
 matched_btn = []
+guesses = 0
 
 window = tk.Tk()
 window.geometry("500x500")

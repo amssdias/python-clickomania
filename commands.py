@@ -9,6 +9,7 @@ def activate(btn, color):
     global matched_btn
     global lbl_score
     global lbl_lost
+    global guesses
 
     if btn['background'] == color:
         btn['background'] = 'grey'
@@ -24,6 +25,7 @@ def activate(btn, color):
             matched_btn[1].config(command='')
             matched_btn[0]['text'] = color
             matched_btn[1]['text'] = color
+            guesses += 1
         else:
             matched_btn[0]['background'] = 'grey'
             matched_btn[1]['background'] = 'grey'
@@ -36,28 +38,44 @@ def activate(btn, color):
 
                 lbl_lost.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
 
+        if guesses == 8:
+            for btn in buttons:
+                btn.destroy()
+
+            lbl_won.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
+
         matched_btn.clear()
 
 
 def create_game():
     global score
+    global guesses
     global lbl_score
     global buttons
     global matched_btn
     global lbl_lost
+    global lbl_won
     global frm_nav
 
     matched_btn = []
-    score = 3
+    guesses = 0
+    score = 25
     colors = ['white', 'black', 'red', 'green',
               'blue', 'cyan', 'yellow', 'magenta'] * 2
 
     update_score(score)
 
     if len(buttons):
+        lbl_won.destroy()
         lbl_lost.destroy()
         for btn in buttons:
             btn.destroy()
+
+    lbl_won = tk.Label(
+        master=frm_main,
+        text="You WON!",
+        font=("courier", 14)
+    )
 
     lbl_lost = tk.Label(
         master=frm_main,
