@@ -3,7 +3,7 @@ from functools import partial
 from layout import *
 
 
-def activate(btn, color):
+def activate(btn: object, color: str):
     global matched_btn
     global score
     global matched_btn
@@ -104,7 +104,7 @@ def create_game():
             colors.pop(random_color)
 
 
-def update_score(score):
+def update_score(score: int):
     lbl_score['text'] = f"Score: {score}"
 
 
